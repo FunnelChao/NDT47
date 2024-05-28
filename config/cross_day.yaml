@@ -1,0 +1,15 @@
+
+train: 
+  object: qianqian
+    date:
+      1205: 
+        angle: all #0,60,120,-60,-120
+      1207: 
+        angle: all #0,60,120,-60,-120
+
+
+test:
+  object: qianqian
+  date:
+    1208: 
+      angle: all #0,60,120,-60,-120
