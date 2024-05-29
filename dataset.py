@@ -13,9 +13,9 @@ def load_data(root_dirs, phase='trainval', train_val_rate=0.7, seed=1):
     total = []
     root_dirs = root_dirs.split(',')
     for dir in root_dirs:
-        samples = glob.glob(os.path.join(f'data/cui/{dir}_psth_TCR', "psth_trail_*"))
+        samples = glob.glob(os.path.join(f'data/{dir}_psth_TCR', "psth_trail_*"))
         samples.sort(key=lambda x:int(x.split('_')[-1].split('.')[0]))
-        pos = pd.read_csv(os.path.join(f'data/cui/{dir}_psth_TCR', "end_pos.csv"),index_col=0).sort_values('TrialIndex').values[:,:2]
+        pos = pd.read_csv(os.path.join(f'data/{dir}_psth_TCR', "end_pos.csv"),index_col=0).sort_values('TrialIndex').values[:,:2]
         sample_pos = np.concatenate([np.array(samples)[:,np.newaxis],pos],axis=-1)
         np.random.shuffle(sample_pos)
         total.append(sample_pos)
