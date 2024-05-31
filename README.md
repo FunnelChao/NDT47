@@ -1,5 +1,5 @@
 # NDT47
-version 1: 默认所有的速度进行训练，同一object跨天训练
+version 2: 可跨object，跨天，跨角速度
 
 ## model
 <img src="model.png" alt="替代文本" width="300">
