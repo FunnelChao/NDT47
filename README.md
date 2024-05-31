@@ -25,6 +25,6 @@ data/
 
 ## train
 ```python
-# train on 1208 data and test on 1207 data directly
-CUDA_VISIBLE_DEVICES=1 python train.py --name "(1208)_(1205)_zscore" --normalize_method zscore --trainval_root_dirs '1208' --test_root_dirs '1205'
+# train on 0314 data and test on (0315,0320,0321,0322) data directly
+CUDA_VISIBLE_DEVICES=0 python train.py --name "(0314)_(0315,0320,0321,0322)_zscore" --normalize_method zscore --cfg 'config/nezha_cross_day_(0314)_(0315,0320,0321,0322).yaml'
 ```

@@ -1,3 +1,7 @@
 
 /wandb/
 /.git/
+.gitignore/
+/__pycache__/
+/data/
+sketch.txt
