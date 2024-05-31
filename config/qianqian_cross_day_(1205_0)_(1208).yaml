@@ -3,15 +3,10 @@ channel: 256
 train: 
   qianqian: 
     20231205: 
-      angle:
+      v_angle:
         - 0
-    20231207: 
-      angle:
-        - 0
-
-
 test:
-  nezha: 
+  qianqian: 
     20231208: 
-      angle:
-        - 0
+      v_angle:
+        all

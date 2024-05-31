@@ -23,4 +23,4 @@ from easydict import EasyDict
 def load_cfg(cfg_path):
     with open(cfg_path) as file:
         data = yaml.safe_load(file)
-    return EasyDict(data)
+    return data

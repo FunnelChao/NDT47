@@ -5,13 +5,8 @@ train:
     20231205: 
       v_angle:
         - 0
-    20231207: 
-      v_angle:
-        - 0
-
-
 test:
   qianqian: 
-    20231208: 
+    20231207: 
       v_angle:
         - 0

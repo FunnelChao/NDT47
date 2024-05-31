@@ -13,7 +13,7 @@ from dataset import *
 from model import NDT47
 import torch.nn as nn
 from tqdm import tqdm
-from utils import r_squared
+from utils import r_squared, load_cfg
 import wandb
 
 def train_one_epoch(model: torch.nn.Module, 
@@ -141,10 +141,9 @@ def get_args_parser():
     parser.add_argument('--pre_norm', action='store_true')
 
     # dataset parameters
+    parser.add_argument('--cfg', default='config/qianqian_cross_day_(1205)_(1207)_0.yaml')
     parser.add_argument('--normalize_method', default='minmax',
                         help='')
-    parser.add_argument('--trainval_root_dirs', default='1208')
-    parser.add_argument('--test_root_dirs', default='1207,1205')
 
     parser.add_argument('--output_dir', default='',
                         help='path where to save, empty for no saving')
@@ -173,8 +172,20 @@ def main(args):
     np.random.seed(seed)
     random.seed(seed)
 
+    # -----------------------------------------------------------------------data config---------------------------------------------------------------
+    data_cfg = load_cfg(args.cfg)
+    train_data, val_data = load_data(cfg=data_cfg['train'], type=data_cfg['type'], phase='trainval', train_val_rate=0.7, seed=1)
+    test_data = load_data(cfg=data_cfg['test'], type=data_cfg['type'], phase='test', seed=1)
+
+    train_dataset = NDTDataset(data=train_data, normalize_method=args.normalize_method)
+    val_dataset = NDTDataset(data=val_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
+    test_dataset = NDTDataset(data=test_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
+
+    train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, collate_fn=collate)
+    val_loader = DataLoader(dataset=val_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)
+    test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)  
     # ----------------------------------------------------------------------model config--------------------------------------------------------------------
-    model = NDT47(input_dim=args.input_dim, 
+    model = NDT47(input_dim=data_cfg['channel'], 
                   d_model=args.hidden_dim, 
                   nhead=args.nheads, 
                   num_encoder_layers=args.enc_layers,
@@ -218,19 +229,7 @@ def main(args):
                                   weight_decay=args.weight_decay)
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, args.lr_drop)
     # -----------------------------------------------------------------------parameters config---------------------------------------------------------------
-    criterion = nn.MSELoss()
-
-    # -----------------------------------------------------------------------data config---------------------------------------------------------------
-    train_data, val_data = load_data(root_dirs=args.trainval_root_dirs, phase='trainval', train_val_rate=0.7, seed=1)
-    test_data = load_data(root_dirs=args.test_root_dirs, phase='test', train_val_rate=0.7, seed=1)
-
-    train_dataset = NDTDataset(data=train_data, normalize_method=args.normalize_method)
-    val_dataset = NDTDataset(data=val_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
-    test_dataset = NDTDataset(data=test_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
-
-    train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, collate_fn=collate)
-    val_loader = DataLoader(dataset=val_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)
-    test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)   
+    criterion = nn.MSELoss() 
 
     # -----------------------------------------------------------------------training---------------------------------------------------------------
     print("Start training")

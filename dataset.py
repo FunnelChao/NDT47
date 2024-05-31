@@ -8,17 +8,30 @@ import numpy as np
 
 
 
-def load_data(root_dirs, phase='trainval', train_val_rate=0.7, seed=1):
+def load_data(cfg, type='unsort' ,phase='trainval', train_val_rate=0.7, seed=1):
     seed_everything(seed)
     total = []
-    root_dirs = root_dirs.split(',')
-    for dir in root_dirs:
-        samples = glob.glob(os.path.join(f'/mnt/c/gaochao/CODE/BCI/ndt47/data/cui/{dir}_psth_TCR', "psth_trail_*"))
-        samples.sort(key=lambda x:int(x.split('_')[-1].split('.')[0]))
-        pos = pd.read_csv(os.path.join(f'/mnt/c/gaochao/CODE/BCI/ndt47/data/cui/{dir}_psth_TCR', "end_pos.csv"),index_col=0).sort_values('TrialIndex').values[:,:2]
-        sample_pos = np.concatenate([np.array(samples)[:,np.newaxis],pos],axis=-1)
-        np.random.shuffle(sample_pos)
-        total.append(sample_pos)
+
+    data_statistics = {}
+    for obj in cfg.keys():
+        data_statistics[obj] = {}
+        for date in cfg[obj]:
+            data_statistics[obj][date] = {}
+            position_label = pd.read_csv(os.path.join(f'data/cui/{obj}/{date}', "end_pos.csv"),index_col=0)
+            position_label = {int(i[-1]):i[:2] for i in position_label.values}
+            if cfg[obj][date]['v_angle'] == 'all':
+                v_angle_list = os.listdir(f'data/cui/{obj}/{date}/psth_{type}')
+            else:
+                v_angle_list = cfg[obj][date]['v_angle']
+            for v in v_angle_list:
+                samples = glob.glob(os.path.join(f'data/cui/{obj}/{date}/psth_{type}/{v}', "psth_trail_*"))
+                data_statistics[obj][date][v] = len(samples)
+
+                samples_trials_index = [i.split('_')[-1].split('.')[0] for i in samples]
+                pos = np.stack([position_label[int(i)] for i in samples_trials_index])
+                data = np.concatenate([np.array(samples)[:,np.newaxis],pos],axis=-1)
+                np.random.shuffle(data)
+                total.append(data)
         
     assert phase in ['trainval','val','test'], f'phase {phase} is not available'
     if phase == 'trainval':
