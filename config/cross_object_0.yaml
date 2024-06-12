@@ -1,0 +1,17 @@
+type: unsort
+channel: 256
+train: 
+  qianqian: 
+    20231205: 
+      angle:
+        - 0
+    20231207: 
+      angle:
+        - 0
+
+
+test:
+  nezha: 
+    20231208: 
+      angle:
+        - 0
