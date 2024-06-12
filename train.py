@@ -175,15 +175,19 @@ def main(args):
     # -----------------------------------------------------------------------data config---------------------------------------------------------------
     data_cfg = load_cfg(args.cfg)
     train_data, val_data = load_data(cfg=data_cfg['train'], type=data_cfg['type'], phase='trainval', train_val_rate=0.7, seed=1)
-    test_data = load_data(cfg=data_cfg['test'], type=data_cfg['type'], phase='test', seed=1)
+    
 
     train_dataset = NDTDataset(data=train_data, normalize_method=args.normalize_method)
     val_dataset = NDTDataset(data=val_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
-    test_dataset = NDTDataset(data=test_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
+    
 
     train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, collate_fn=collate)
     val_loader = DataLoader(dataset=val_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)
-    test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)  
+    
+    if data_cfg.get('test'):
+        test_data = load_data(cfg=data_cfg['test'], type=data_cfg['type'], phase='test', seed=1)
+        test_dataset = NDTDataset(data=test_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
+        test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)  
     # ----------------------------------------------------------------------model config--------------------------------------------------------------------
     model = NDT47(input_dim=data_cfg['channel'], 
                   d_model=args.hidden_dim, 
@@ -240,7 +244,8 @@ def main(args):
     for epoch in range(args.start_epoch, args.epochs):
         train_one_epoch(model, criterion, train_loader, optimizer, device, epoch, args.clip_max_norm)
         evaluate(model, criterion, val_loader, device, epoch, display_config={'color':'blue', 'phase':'val'})
-        evaluate(model, criterion, test_loader, device, epoch, display_config={'color':'yellow', 'phase':'test'})
+        if data_cfg.get('test'):
+            evaluate(model, criterion, test_loader, device, epoch, display_config={'color':'yellow', 'phase':'test'})
         lr_scheduler.step()
         if args.output_dir:
             checkpoint_paths = [output_dir / 'checkpoint.pth']

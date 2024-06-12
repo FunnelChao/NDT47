@@ -1,0 +1,12 @@
+train:[Epoch:0]:                              [toatl_loss:51.59387]                              [regre_loss:47.07371]                              [cls_loss:4.52016]                              [R2:-1047.2997]                              [cls_acc:0.0116]: 100%
+  0%|[34m                                                                                                                                                                                                                                            [39m| 0/1 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 362, in <module>
+    main(args)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 334, in main
+    evaluate(model, criterion, val_loader, device, epoch, display_config={'color':'blue', 'phase':'val'})
+  File "/home/ubuntu/anaconda3/envs/ndt2/lib/python3.9/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 165, in evaluate
+    [cls_acc:{running_cls_hit/running_sample_num:.5f:.4f}]'
+TypeError: unsupported operand type(s) for /: 'list' and 'int'

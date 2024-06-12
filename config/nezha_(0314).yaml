@@ -1,0 +1,8 @@
+type: unsort
+channel: 1024
+train: 
+  nezha: 
+    20240314: 
+      v_angle:
+        all
+        

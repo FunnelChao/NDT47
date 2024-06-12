@@ -11,6 +11,9 @@ def seed_everything(seed):
 
 
 def r_squared(y_true, y_pred):
+    """
+    shape:[bsz,2]
+    """
     mean_y_true = torch.mean(y_true,dim=0)
     ss_tot = torch.sum((y_true - mean_y_true) ** 2, dim=0)
     ss_res = torch.sum((y_true - y_pred) ** 2, dim=0)

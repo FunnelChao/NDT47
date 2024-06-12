@@ -121,7 +121,7 @@ class TransformerDecoder(nn.Module):
         if self.return_intermediate:
             return torch.stack(intermediate)
 
-        return output.unsqueeze(0)
+        return output
 
 
 class TransformerEncoderLayer(nn.Module):
@@ -317,7 +317,9 @@ def create_1d_absolute_sincos_embedding(n_pos_vec, dim, device):
 
 
 class NDT47(nn.Module):
-
+    """
+    using 25 bins(20ms/bin) before-MO to decode final end_pos 
+    """
     def __init__(self, input_dim=256, d_model=512, nhead=8, num_encoder_layers=6,
                  dim_feedforward=2048, dropout=0.1, d_out=2,
                  activation="relu", normalize_before=False,
@@ -348,7 +350,7 @@ class NDT47(nn.Module):
         mask = samples['mask']
 
         bsz = feat.shape[0]
-        #-----cat out_token------
+        #-----cat p_token------
         src = torch.concat([self.out_token.weight.repeat(bsz,1)[:,None,:], feat],dim=1)
         mask4outtoken = torch.zeros(bsz,device=src.device)[:,None].bool()
         new_mask = torch.concat([mask4outtoken, mask],dim=-1)
@@ -358,3 +360,63 @@ class NDT47(nn.Module):
         hs = self.encoder(src.permute(1,0,2), src_key_padding_mask=new_mask, pos=pos_embedd)
         out = self.decode_position(hs[1,...])
         return out
+    
+
+class NDT47_for_traj(nn.Module):
+    """
+    using 25 bins(20ms/bin) before-MO to decode trajectory
+    """
+    def __init__(self, 
+                 input_dim=256, d_model=512, nhead=8, 
+                 num_encoder_layers=6,
+                 num_decoder_layers=6,
+                 dim_feedforward=2048, dropout=0.1, d_out=2,
+                 max_query_size=100,
+                 activation="relu", normalize_before=False,
+                 ):
+        super().__init__()
+        self.d_model = d_model
+        self.proj = nn.Linear(input_dim, d_model)
+        
+        #------------------------------encoder------------------------------------
+        encoder_layer = TransformerEncoderLayer(d_model, nhead, dim_feedforward,
+                                                dropout, activation, normalize_before)
+        encoder_norm = nn.LayerNorm(d_model) if normalize_before else None
+        self.encoder = TransformerEncoder(encoder_layer, num_encoder_layers, encoder_norm)
+
+        #------------------------------decoder------------------------------------
+        decoder_layer = TransformerDecoderLayer(d_model, nhead, dim_feedforward,
+                                        dropout, activation, normalize_before)
+        decoder_norm = nn.LayerNorm(d_model)
+        self.decoder = TransformerDecoder(decoder_layer, num_decoder_layers, decoder_norm)
+
+        #------------------------------solver----------------------------------------
+        self.decode_position = nn.Linear(d_model, d_out)
+        self.pos_query = nn.Embedding(max_query_size, d_model)
+        self.end_clf = nn.Linear(d_model, 1) # recognize end position
+        self._reset_parameters()
+
+        self.d_model = d_model
+        self.nhead = nhead
+
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+
+    def forward(self, samples):
+        feat = samples['feat']
+        feat = self.proj(feat)
+        mask = samples['mask']
+
+        bsz = feat.shape[0]
+
+        pos_embedd = create_1d_absolute_sincos_embedding(n_pos_vec=torch.arange(feat.shape[1], dtype=torch.float), dim=self.d_model, device=feat.device)[:,None,:].repeat(1,bsz,1)
+        hs = self.encoder(feat.permute(1,0,2), pos=pos_embedd)
+        
+        query_embedd = self.pos_query(samples['pos_index'])
+        query_result = self.decoder(tgt=query_embedd.permute(1,0,2), memory=hs, tgt_key_padding_mask=mask).permute(1,0,2)
+
+        decode_traj = self.decode_position(query_result)
+        is_end = self.end_clf(query_result)
+        return (decode_traj, is_end)

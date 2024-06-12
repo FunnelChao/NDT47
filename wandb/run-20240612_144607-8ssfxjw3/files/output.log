@@ -1,0 +1,11 @@
+  0%|[31m                                                                                                                                                                                                                                            [39m| 0/2 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 361, in <module>
+    main(args)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 332, in main
+    train_one_epoch(model, criterion, train_loader, optimizer, device, epoch, args.clip_max_norm)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 81, in train_one_epoch
+    pbar.set_description(f'train:[Epoch:{epoch}]: \
+  File "/home/ubuntu/anaconda3/envs/ndt2/lib/python3.9/site-packages/torch/_tensor.py", line 858, in __format__
+    return self.item().__format__(format_spec)
+ValueError: Invalid format specifier

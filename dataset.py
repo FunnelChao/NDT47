@@ -7,8 +7,11 @@ from utils import seed_everything
 import numpy as np
 
 
-
-def load_data(cfg, type='unsort' ,phase='trainval', train_val_rate=0.7, seed=1):
+#---------------------------------------------------------------------------------------------for decoding end_pos---------------------------------------------------------------------------------------------
+def load_data(cfg, type='unsort', phase='trainval', train_val_rate=0.7, seed=1):
+    """
+    return : N * [path, x, y]
+    """
     seed_everything(seed)
     total = []
 
@@ -34,6 +37,7 @@ def load_data(cfg, type='unsort' ,phase='trainval', train_val_rate=0.7, seed=1):
                 total.append(data)
         
     assert phase in ['trainval','val','test'], f'phase {phase} is not available'
+    assert train_val_rate < 1
     if phase == 'trainval':
         train_samples = np.vstack([i[:int(i.shape[0]*train_val_rate)] for i in total])
         val_samples = np.vstack([i[int(i.shape[0]*train_val_rate):] for i in total])
@@ -100,10 +104,7 @@ def normalize(data, method='zscore'):
     return scaled_data, scaler
 
 
-
-
 if __name__ == '__main__':
-
     # debug
     root_dirs = [1205,1207]
 

@@ -1,0 +1,17 @@
+  0%|[31m                                                                                                                                                                                                                         [39m| 0/4 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train.py", line 270, in <module>
+    main(args)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train.py", line 242, in main
+    train_one_epoch(model, criterion, train_loader, optimizer, device, epoch, args.clip_max_norm)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train.py", line 39, in train_one_epoch
+    outputs = model(samples)
+  File "/home/ubuntu/anaconda3/envs/ndt2/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/model.py", line 347, in forward
+    feat = self.proj(feat)
+  File "/home/ubuntu/anaconda3/envs/ndt2/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/ubuntu/anaconda3/envs/ndt2/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (3200x1024 and 256x512)

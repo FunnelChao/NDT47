@@ -1,0 +1,50 @@
+2024-06-11 17:11:38,686 INFO    StreamThr :2835703 [internal.py:wandb_internal():85] W&B internal server running at pid: 2835703, started at: 2024-06-11 17:11:38.685247
+2024-06-11 17:11:38,688 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: status
+2024-06-11 17:11:38,690 INFO    WriterThread:2835703 [datastore.py:open_for_write():87] open: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/run-89qakjf6.wandb
+2024-06-11 17:11:38,691 DEBUG   SenderThread:2835703 [sender.py:send():378] send: header
+2024-06-11 17:11:38,724 DEBUG   SenderThread:2835703 [sender.py:send():378] send: run
+2024-06-11 17:11:39,402 INFO    SenderThread:2835703 [dir_watcher.py:__init__():211] watching files in: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files
+2024-06-11 17:11:39,402 INFO    SenderThread:2835703 [sender.py:_start_run_threads():1123] run started: 89qakjf6 with start time 1718097098.684957
+2024-06-11 17:11:39,411 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: check_version
+2024-06-11 17:11:39,412 DEBUG   SenderThread:2835703 [sender.py:send_request():405] send_request: check_version
+2024-06-11 17:11:39,661 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: run_start
+2024-06-11 17:11:39,666 DEBUG   HandlerThread:2835703 [system_info.py:__init__():26] System info init
+2024-06-11 17:11:39,666 DEBUG   HandlerThread:2835703 [system_info.py:__init__():41] System info init done
+2024-06-11 17:11:39,666 INFO    HandlerThread:2835703 [system_monitor.py:start():194] Starting system monitor
+2024-06-11 17:11:39,667 INFO    HandlerThread:2835703 [system_monitor.py:probe():214] Collecting system info
+2024-06-11 17:11:39,667 INFO    SystemMonitor:2835703 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-06-11 17:11:39,668 INFO    SystemMonitor:2835703 [interfaces.py:start():188] Started cpu monitoring
+2024-06-11 17:11:39,669 INFO    SystemMonitor:2835703 [interfaces.py:start():188] Started disk monitoring
+2024-06-11 17:11:39,670 INFO    SystemMonitor:2835703 [interfaces.py:start():188] Started gpu monitoring
+2024-06-11 17:11:39,670 INFO    SystemMonitor:2835703 [interfaces.py:start():188] Started memory monitoring
+2024-06-11 17:11:39,672 INFO    SystemMonitor:2835703 [interfaces.py:start():188] Started network monitoring
+2024-06-11 17:11:39,685 DEBUG   HandlerThread:2835703 [system_info.py:probe():150] Probing system
+2024-06-11 17:11:39,694 DEBUG   HandlerThread:2835703 [system_info.py:_probe_git():135] Probing git
+2024-06-11 17:11:39,724 DEBUG   HandlerThread:2835703 [system_info.py:_probe_git():143] Probing git done
+2024-06-11 17:11:39,725 DEBUG   HandlerThread:2835703 [system_info.py:probe():198] Probing system done
+2024-06-11 17:11:39,725 DEBUG   HandlerThread:2835703 [system_monitor.py:probe():223] {'os': 'Linux-6.5.0-25-generic-x86_64-with-glibc2.35', 'python': '3.9.19', 'heartbeatAt': '2024-06-11T09:11:39.685289', 'startedAt': '2024-06-11T09:11:38.678020', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/mnt/c/gaochao/CODE/BCI/ndt47/train.py', 'codePathLocal': 'train.py', 'codePath': 'train.py', 'git': {'remote': 'https://github.com/FunnelChao/NDT47.git', 'commit': 'db4489caa64b8b957afba525bf34dc3fc6ffcf27'}, 'email': '1217648680@qq.com', 'root': '/mnt/c/gaochao/CODE/BCI/ndt47', 'host': 'nezha', 'username': 'ubuntu', 'executable': '/home/ubuntu/anaconda3/envs/ndt2/bin/python', 'cpu_count': 24, 'cpu_count_logical': 32, 'cpu_freq': {'current': 2554.76715625, 'min': 800.0, 'max': 4937.5}, 'cpu_freq_per_core': [{'current': 3853.815, 'min': 800.0, 'max': 5500.0}, {'current': 800.0, 'min': 800.0, 'max': 5500.0}, {'current': 800.0, 'min': 800.0, 'max': 5500.0}, {'current': 3297.775, 'min': 800.0, 'max': 5500.0}, {'current': 3900.938, 'min': 800.0, 'max': 5800.0}, {'current': 5472.078, 'min': 800.0, 'max': 5800.0}, {'current': 4163.89, 'min': 800.0, 'max': 5800.0}, {'current': 800.0, 'min': 800.0, 'max': 5800.0}, {'current': 3340.449, 'min': 800.0, 'max': 5500.0}, {'current': 3271.326, 'min': 800.0, 'max': 5500.0}, {'current': 2545.624, 'min': 800.0, 'max': 5500.0}, {'current': 800.0, 'min': 800.0, 'max': 5500.0}, {'current': 2563.982, 'min': 800.0, 'max': 5500.0}, {'current': 800.0, 'min': 800.0, 'max': 5500.0}, {'current': 2567.362, 'min': 800.0, 'max': 5500.0}, {'current': 800.0, 'min': 800.0, 'max': 5500.0}, {'current': 2458.245, 'min': 800.0, 'max': 4300.0}, {'current': 2443.827, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 2043.849, 'min': 800.0, 'max': 4300.0}, {'current': 2513.49, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 2430.578, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}], 'disk': {'/': {'total': 1841.180248260498, 'used': 404.02721405029297}}, 'gpu': 'NVIDIA GeForce RTX 4090', 'gpu_count': 2, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4090', 'memory_total': 24146608128}, {'name': 'NVIDIA GeForce RTX 4090', 'memory_total': 25757220864}], 'memory': {'total': 125.55722045898438}}
+2024-06-11 17:11:39,726 INFO    HandlerThread:2835703 [system_monitor.py:probe():224] Finished collecting system info
+2024-06-11 17:11:39,726 INFO    HandlerThread:2835703 [system_monitor.py:probe():227] Publishing system info
+2024-06-11 17:11:39,727 DEBUG   HandlerThread:2835703 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-06-11 17:11:40,405 INFO    Thread-17 :2835703 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files/conda-environment.yaml
+2024-06-11 17:11:40,550 DEBUG   HandlerThread:2835703 [system_info.py:_save_conda():222] Saving conda packages done
+2024-06-11 17:11:40,553 INFO    HandlerThread:2835703 [system_monitor.py:probe():229] Finished publishing system info
+2024-06-11 17:11:40,557 DEBUG   SenderThread:2835703 [sender.py:send():378] send: files
+2024-06-11 17:11:40,557 INFO    SenderThread:2835703 [sender.py:_save_file():1389] saving file wandb-metadata.json with policy now
+2024-06-11 17:11:40,652 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: python_packages
+2024-06-11 17:11:40,653 DEBUG   SenderThread:2835703 [sender.py:send_request():405] send_request: python_packages
+2024-06-11 17:11:40,653 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 17:11:40,654 DEBUG   SenderThread:2835703 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 17:11:41,089 DEBUG   SenderThread:2835703 [sender.py:send():378] send: telemetry
+2024-06-11 17:11:41,403 INFO    Thread-17 :2835703 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files/conda-environment.yaml
+2024-06-11 17:11:41,404 INFO    Thread-17 :2835703 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files/requirements.txt
+2024-06-11 17:11:41,404 INFO    Thread-17 :2835703 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files/output.log
+2024-06-11 17:11:41,404 INFO    Thread-17 :2835703 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files/wandb-metadata.json
+2024-06-11 17:11:41,589 INFO    wandb-upload_0:2835703 [upload_job.py:push():130] Uploaded file /tmp/tmpa0e_8i1gwandb/ghveh90m-wandb-metadata.json
+2024-06-11 17:11:43,405 INFO    Thread-17 :2835703 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files/output.log
+2024-06-11 17:11:44,091 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 17:11:49,410 INFO    Thread-17 :2835703 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/c/gaochao/CODE/BCI/ndt47/wandb/run-20240611_171138-89qakjf6/files/output.log
+2024-06-11 17:11:49,623 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 17:11:54,624 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 17:11:55,654 DEBUG   HandlerThread:2835703 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 17:11:55,654 DEBUG   SenderThread:2835703 [sender.py:send_request():405] send_request: stop_status

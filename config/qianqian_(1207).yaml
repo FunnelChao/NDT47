@@ -1,0 +1,8 @@
+type: unsort
+channel: 256
+train: 
+  qianqian: 
+    20231207: 
+      v_angle:
+        all
+        

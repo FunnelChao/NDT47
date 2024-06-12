@@ -1,0 +1,9 @@
+  0%|[31m                                                                                                                                                                                                                                            [39m| 0/2 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 361, in <module>
+    main(args)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 332, in main
+    train_one_epoch(model, criterion, train_loader, optimizer, device, epoch, args.clip_max_norm)
+  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 86, in train_one_epoch
+    [cls_acc:{torch.concat(torch.tensor(running_cls_hit)).sum()/running_sample_num:.4f}]'
+TypeError: concat(): argument 'tensors' (position 1) must be tuple of Tensors, not Tensor
