@@ -1,3 +1,5 @@
-
-/wandb/
-
+.git
+__pycache__
+data/
+wandb/
+.gitignore
