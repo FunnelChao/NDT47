@@ -1,9 +1,0 @@
-train:[Epoch:0]:                              [toatl_loss:51.59387]                              [regre_loss:47.07371]                              [cls_loss:4.52016]                              [R2:-1047.2997]                              [cls_acc:0.0116]: 100%
-Traceback (most recent call last):
-  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 361, in <module>
-    main(args)
-  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 332, in main
-    train_one_epoch(model, criterion, train_loader, optimizer, device, epoch, args.clip_max_norm)
-  File "/mnt/c/gaochao/CODE/BCI/ndt47/train4traj.py", line 97, in train_one_epoch
-    'cls_acc':running_cls_hit/running_sample_num
-TypeError: unsupported operand type(s) for /: 'list' and 'int'

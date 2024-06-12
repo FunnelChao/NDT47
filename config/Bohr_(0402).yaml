@@ -1,8 +1,0 @@
-type: unsort
-channel: 192
-train: 
-  Bohr: 
-    20240402: 
-      v_angle:
-        all
-        
