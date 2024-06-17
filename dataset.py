@@ -55,7 +55,7 @@ class NDTDataset(Dataset):
             self.scaler = scaler
         else:
             self.scaler = scaler
-            self.samples[:,1:] = scaler.fit_transform(data[:,1:])
+            self.samples[:,1:] = scaler.transform(data[:,1:])
 
     def __len__(self):
         return len(self.samples)
@@ -90,7 +90,8 @@ def normalize(data, method='zscore'):
         # 创建 StandardScaler 对象
         scaler = StandardScaler()
         # 训练并应用 Z-Score 归一化
-        scaled_data = scaler.fit_transform(data)
+        scaler.fit(data)
+        scaled_data = scaler.transform(data)
         # # 反归一化已归一化的数据
         # original_data = scaler.inverse_transform(scaled_data)
     elif method=='minmax':
@@ -98,7 +99,8 @@ def normalize(data, method='zscore'):
         # 创建 MinMaxScaler 对象
         scaler = MinMaxScaler()
         # 训练并应用归一化到指定范围
-        scaled_data = scaler.fit_transform(data)
+        scaler.fit(data)
+        scaled_data = scaler.transform(data)
         # # 反归一化已归一化的数据
         # original_data = scaler.inverse_transform(scaled_data)
     return scaled_data, scaler

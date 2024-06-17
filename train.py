@@ -141,8 +141,8 @@ def get_args_parser():
     parser.add_argument('--pre_norm', action='store_true')
 
     # dataset parameters
-    parser.add_argument('--cfg', default='config/qianqian_cross_day_(1205)_(1207)_0.yaml')
-    parser.add_argument('--normalize_method', default='minmax',
+    parser.add_argument('--cfg', default='config/Bohr_(0402_90)_(0403_90).yaml')
+    parser.add_argument('--normalize_method', default='zscore',
                         help='')
 
     parser.add_argument('--output_dir', default='',
@@ -186,7 +186,7 @@ def main(args):
     
     if data_cfg.get('test'):
         test_data = load_data(cfg=data_cfg['test'], type=data_cfg['type'], phase='test', seed=1)
-        test_dataset = NDTDataset(data=test_data, normalize_method=args.normalize_method, scaler=train_dataset.scaler)
+        test_dataset = NDTDataset(data=test_data, normalize_method=args.normalize_method, scaler=None)
         test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate)  
     # ----------------------------------------------------------------------model config--------------------------------------------------------------------
     model = NDT47(input_dim=data_cfg['channel'], 

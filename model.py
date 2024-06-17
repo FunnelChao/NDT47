@@ -415,7 +415,7 @@ class NDT47_for_traj(nn.Module):
         hs = self.encoder(feat.permute(1,0,2), pos=pos_embedd)
         
         query_embedd = self.pos_query(samples['pos_index'])
-        query_result = self.decoder(tgt=query_embedd.permute(1,0,2), memory=hs, tgt_key_padding_mask=mask).permute(1,0,2)
+        query_result = self.decoder(tgt=query_embedd.permute(1,0,2), memory=hs, tgt_key_padding_mask=None).permute(1,0,2)
 
         decode_traj = self.decode_position(query_result)
         is_end = self.end_clf(query_result)

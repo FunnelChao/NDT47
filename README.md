@@ -2,7 +2,7 @@
 version 2: 可跨object，跨天，跨角速度，可decode trajectory
 
 ## model
-<img src="model.png" alt="替代文本" width="300">
+<img src="fig/model.png" alt="替代文本" width="300">
 
 ## data preparation
 ```

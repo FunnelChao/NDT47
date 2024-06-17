@@ -28,4 +28,20 @@ CUDA_VISIBLE_DEVICES=1 python train.py --name "(0314,0315,0320,0321)_(0322)_zsco
 CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr(0402_0)_(0402_90,-90,180,-180)_zscore" --normalize_method zscore --cfg 'config/Bohr_cross_angle_(0402_0)_(0402_90,-90,180,-180).yaml'
 CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr(0402_0,-180,90)_(0402_-90,180)_zscore" --normalize_method zscore --cfg 'config/Bohr_cross_angle_(0402_0,-180,90)_(0402_-90,180).yaml'
 
-CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr(0402)_zscore" --normalize_method zscore --cfg 'config/Bohr_(0402).yaml'
+
+CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr_(0229,0402)_(0403)_zscore" --normalize_method zscore --cfg 'config/Bohr_(0229,0402)_(0403).yaml'
+CUDA_VISIBLE_DEVICES=1 python train.py --name "Bohr_(0229,0403)_(0402)_zscore" --normalize_method zscore --cfg 'config/Bohr_(0229,0403)_(0402).yaml'
+CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr_(0402,0403)_(0229)_zscore" --normalize_method zscore --cfg 'config/Bohr_(0402,0403)_(0229).yaml'
+
+CUDA_VISIBLE_DEVICES=1 python train.py --name "Bohr_(0402_0,0403_0)_(0229_0)_zscore" --normalize_method zscore --cfg 'config/Bohr_(0402_0,0403_0)_(0229_0).yaml'
+CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr_(0402)_(0403)_layer12_zscore" --normalize_method zscore --cfg 'config/Bohr_(0402)_(0403).yaml' --enc_layers 12
+
+CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr_(0402_90)_(0403_90)_layer1_zscore" --normalize_method zscore --cfg 'config/Bohr_(0402_90)_(0403_90).yaml' --enc_layers 1
+CUDA_VISIBLE_DEVICES=0 python train.py --name "Bohr_(0402_90)_(0403_90)_zscore_testscaler" --normalize_method zscore --cfg 'config/Bohr_(0402_90)_(0403_90).yaml'
+
+CUDA_VISIBLE_DEVICES=1 python train.py --name "Bohr_(0402_90)_(0403_90)_minmax" --normalize_method minmax --cfg 'config/Bohr_(0402_90)_(0403_90).yaml'
+
+
+
+# Bohr trajectory
+CUDA_VISIBLE_DEVICES=0 python train4traj.py --name "Bohr(0402)_zscore" --normalize_method zscore --cfg 'config/Bohr_(0402).yaml'
